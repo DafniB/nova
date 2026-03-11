@@ -1,118 +1,477 @@
-# NOVA Fashion Store 👗
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AURA Fashion</title>
 
-An interactive **modern fashion e-commerce website** built using **HTML, CSS, and JavaScript**.
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-This project demonstrates a stylish clothing store UI with a shopping cart system, responsive layout, and dynamic product rendering.
+<style>
 
----
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins;
+}
 
-## 🌐 Live Features
+body{
+background:#fafafa;
+color:#222;
+}
 
-* Modern fashion landing page
-* Interactive product cards
-* Add to cart functionality
-* Sliding cart panel
-* Dynamic product rendering with JavaScript
-* Responsive layout for mobile and desktop
-* Smooth scrolling shopping experience
+/* NAV */
 
----
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 8%;
+background:white;
+box-shadow:0 3px 15px rgba(0,0,0,0.06);
+position:sticky;
+top:0;
+z-index:1000;
+}
 
-## 🖼 Preview
+.logo{
+font-family:Playfair Display;
+font-size:30px;
+letter-spacing:2px;
+}
 
-Hero fashion landing page with featured clothing items and a modern store interface.
+nav ul{
+display:flex;
+list-style:none;
+gap:35px;
+}
 
----
+nav a{
+text-decoration:none;
+color:#333;
+font-weight:500;
+}
 
-## 🛠 Technologies Used
+nav a:hover{
+color:#e91e63;
+}
 
-* **HTML5**
-* **CSS3**
-* **JavaScript (Vanilla JS)**
-* **Google Fonts**
-* **Unsplash Images**
+.icons{
+display:flex;
+gap:15px;
+font-size:22px;
+cursor:pointer;
+}
 
----
+/* HERO */
 
-## 📂 Project Structure
+.hero{
+height:90vh;
+background-image:url("https://images.unsplash.com/photo-1495121605193-b116b5b09a21?q=80&w=2070");
+background-size:cover;
+background-position:center;
+display:flex;
+align-items:center;
+padding-left:10%;
+color:white;
+}
 
-```
-nova-fashion-store
-│
-├── index.html      # Main website file
-└── README.md       # Project documentation
-```
+.hero h1{
+font-size:70px;
+font-family:Playfair Display;
+max-width:500px;
+}
 
----
+.hero button{
+margin-top:25px;
+padding:15px 40px;
+border:none;
+background:#e91e63;
+color:white;
+font-size:18px;
+border-radius:40px;
+cursor:pointer;
+transition:0.3s;
+}
 
-## 🚀 How to Run the Project
+.hero button:hover{
+transform:scale(1.05);
+}
 
-1. Clone the repository
+/* CATEGORY */
 
-```
-git clone https://github.com/yourusername/nova-fashion-store.git
-```
+.categories{
+display:flex;
+justify-content:center;
+gap:20px;
+padding:50px 0;
+flex-wrap:wrap;
+}
 
-2. Open the project folder
+.cat{
+padding:12px 30px;
+border-radius:30px;
+background:white;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+cursor:pointer;
+transition:.3s;
+}
 
-3. Run the website by opening:
+.cat:hover{
+background:#e91e63;
+color:white;
+}
 
-```
-index.html
-```
+/* PRODUCTS */
 
-in your browser.
+.products{
+padding:20px 8%;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:35px;
+}
 
----
+.card{
+background:white;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 8px 25px rgba(0,0,0,0.08);
+transition:0.3s;
+position:relative;
+}
 
-## ✨ Features
+.card:hover{
+transform:translateY(-10px);
+}
 
-✔ Interactive shopping UI
-✔ Animated cart drawer
-✔ Dynamic product rendering
-✔ Clean fashion-style layout
-✔ Mobile responsive design
+.card img{
+width:100%;
+height:340px;
+object-fit:cover;
+transition:0.4s;
+}
 
----
+.card:hover img{
+transform:scale(1.1);
+}
 
-## 📸 Product Data
+.card-info{
+padding:18px;
+}
 
-Products are dynamically generated using a JavaScript array:
+.price{
+color:#e91e63;
+font-weight:600;
+margin-top:6px;
+}
 
-```
-const products = [
-  { name: "Summer Floral Dress", price: 49 },
-  { name: "Black Evening Dress", price: 89 },
-  ...
+.actions{
+margin-top:10px;
+display:flex;
+gap:10px;
+}
+
+button{
+border:none;
+padding:8px 15px;
+border-radius:20px;
+cursor:pointer;
+}
+
+.add{
+background:#111;
+color:white;
+}
+
+.wish{
+background:#eee;
+}
+
+/* MODAL */
+
+.modal{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+display:none;
+align-items:center;
+justify-content:center;
+}
+
+.modal-content{
+background:white;
+padding:30px;
+border-radius:10px;
+max-width:600px;
+width:90%;
+}
+
+.modal img{
+width:100%;
+border-radius:10px;
+margin-bottom:15px;
+}
+
+/* CART */
+
+.cart{
+position:fixed;
+right:-350px;
+top:0;
+width:320px;
+height:100%;
+background:white;
+box-shadow:-4px 0 20px rgba(0,0,0,0.2);
+padding:20px;
+transition:0.4s;
+}
+
+.cart.active{
+right:0;
+}
+
+.cart-item{
+display:flex;
+justify-content:space-between;
+margin:10px 0;
+}
+
+/* FOOTER */
+
+footer{
+margin-top:70px;
+background:#111;
+color:white;
+padding:40px;
+text-align:center;
+}
+
+@media(max-width:700px){
+
+.hero h1{
+font-size:40px;
+}
+
+nav ul{
+display:none;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">AURA</div>
+
+<ul>
+<li><a href="#">Home</a></li>
+<li><a href="#">Women</a></li>
+<li><a href="#">Men</a></li>
+<li><a href="#">New</a></li>
+</ul>
+
+<div class="icons">
+<span onclick="toggleCart()">🛒 <span id="count">0</span></span>
+</div>
+
+</nav>
+
+<section class="hero">
+<div>
+<h1>Elevate Your Style</h1>
+<button onclick="scrollShop()">Shop Now</button>
+</div>
+</section>
+
+<div class="categories">
+<div class="cat" onclick="filter('all')">All</div>
+<div class="cat" onclick="filter('dress')">Dresses</div>
+<div class="cat" onclick="filter('casual')">Casual</div>
+<div class="cat" onclick="filter('party')">Party</div>
+</div>
+
+<section class="products" id="products"></section>
+
+<div class="cart" id="cart">
+<h2>Your Cart</h2>
+<div id="cartItems"></div>
+<h3>Total $<span id="total">0</span></h3>
+</div>
+
+<div class="modal" id="modal">
+<div class="modal-content" id="modalContent"></div>
+</div>
+
+<footer>
+<h2>AURA Fashion</h2>
+<p>Modern Fashion Experience</p>
+</footer>
+
+<script>
+
+const products=[
+
+{
+name:"Floral Summer Dress",
+price:49,
+cat:"dress",
+img:"https://images.unsplash.com/photo-1520975916090-3105956dac38?q=80&w=2070"
+},
+
+{
+name:"Elegant Black Dress",
+price:85,
+cat:"party",
+img:"https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?q=80&w=2070"
+},
+
+{
+name:"Casual Street Outfit",
+price:60,
+cat:"casual",
+img:"https://images.unsplash.com/photo-1492707892479-7bc8d5a4ee93?q=80&w=2070"
+},
+
+{
+name:"Luxury Red Dress",
+price:120,
+cat:"party",
+img:"https://images.unsplash.com/photo-1520975922284-9d2b0c9e4c96?q=80&w=2070"
+},
+
+{
+name:"Minimal White Dress",
+price:70,
+cat:"dress",
+img:"https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070"
+}
+
 ]
+
+let cart=[]
+
+function display(list){
+
+const container=document.getElementById("products")
+container.innerHTML=""
+
+list.forEach((p,i)=>{
+
+container.innerHTML+=`
+
+<div class="card">
+
+<img src="${p.img}" onclick="preview(${i})">
+
+<div class="card-info">
+
+<h3>${p.name}</h3>
+<p class="price">$${p.price}</p>
+
+<div class="actions">
+<button class="add" onclick="add(${i})">Add to Cart</button>
+<button class="wish">❤</button>
+</div>
+
+</div>
+
+</div>
+
+`
+
+})
+
+}
+
+display(products)
+
+function filter(cat){
+
+if(cat=="all") display(products)
+
+else display(products.filter(p=>p.cat==cat))
+
+}
+
+function add(i){
+
+cart.push(products[i])
+updateCart()
+
+}
+
+function updateCart(){
+
+document.getElementById("count").innerText=cart.length
+
+let html=""
+let total=0
+
+cart.forEach(item=>{
+
+html+=`
+<div class="cart-item">
+<span>${item.name}</span>
+<span>$${item.price}</span>
+</div>
+`
+
+total+=item.price
+
+})
+
+document.getElementById("cartItems").innerHTML=html
+document.getElementById("total").innerText=total
+
+}
+
+function toggleCart(){
+
+document.getElementById("cart").classList.toggle("active")
+
+}
+
+function preview(i){
+
+let p=products[i]
+
+document.getElementById("modalContent").innerHTML=`
+
+<img src="${p.img}">
+<h2>${p.name}</h2>
+<p>$${p.price}</p>
+<button onclick="add(${i})">Add to Cart</button>
+
+`
+
+document.getElementById("modal").style.display="flex"
+
+}
+
+document.getElementById("modal").onclick=function(){
+
+this.style.display="none"
+
+}
+
+function scrollShop(){
+
+document.getElementById("products").scrollIntoView({behavior:"smooth"})
+
+}
+
+</script>
+
+</body>
+</html>
 ```
 
-This allows easy expansion to connect with a backend or API later.
-
----
-
-## 🔮 Future Improvements
-
-* Product detail page
-* Wishlist system
-* Search and category filtering
-* Checkout page
-* Payment gateway integration
-* Backend database
-* User authentication
-
----
-
-## Screenshots
-
-
-
-## 👨‍💻 Author
-
-Created by **Dafni**
-
----
-
-## 📄 License
-
-This project is open-source and free to use.
